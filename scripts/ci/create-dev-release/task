@@ -3,6 +3,7 @@
 function main() {
   pushd release > /dev/null
     bosh -n -t ${BOSH_DIRECTOR} create release --force --timestamp-version
+    mv dev_releases/*/*.tgz release.tgz
   popd > /dev/null
 }
 
