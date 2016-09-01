@@ -1,0 +1,9 @@
+#!/bin/bash -exu
+
+function main() {
+  pushd release > /dev/null
+    bosh -t ${BOSH_DIRECTOR} create release --force --version "${RELEASE_VERSION}"
+  popd > /dev/null
+}
+
+main
