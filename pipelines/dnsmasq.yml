@@ -4,10 +4,6 @@ groups:
   - deploy-dnsmasq
 
 resources:
-- name: current_time
-  type: time
-  source:
-    interval: 1s
 - name: mega-ci
   type: git
   source:
@@ -41,8 +37,6 @@ jobs:
       trigger: true
     - get: stemcell
       resource: aws-stemcell
-    - get: dev_version
-      resource: current_time
   - task: create-dev-release
     file: mega-ci/scripts/ci/create-dev-release/task.yml
     config:
