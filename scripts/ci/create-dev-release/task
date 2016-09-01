@@ -2,7 +2,7 @@
 
 function main() {
   pushd release > /dev/null
-    bosh -t ${BOSH_DIRECTOR} create release --force --version "${RELEASE_VERSION}"
+    bosh -t ${BOSH_DIRECTOR} create release --force
   popd > /dev/null
 }
 
