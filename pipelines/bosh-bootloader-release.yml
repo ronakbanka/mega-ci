@@ -1,0 +1,32 @@
+groups:
+- name: bosh-bootloader-release
+  jobs:
+  - create-release
+
+resources:
+- name: bosh-bootloader
+  type: git
+  source:
+    branch: master
+    uri: https://github.com/cloudfoundry/bosh-bootloader.git
+- name: github-release
+  type: github-release
+  source:
+    user: cloudfoundry
+    repository: bosh-bootloader
+    access_token: e78364cda027ce5bbd7b34f1110da574352a54a5
+- name: mega-ci
+  type: git
+  source:
+    branch: feature-bbl-github-releases
+    uri: https://github.com/cloudfoundry/mega-ci.git
+
+jobs:
+- name: create-release
+  public: true
+  plan:
+  - aggregate:
+    - get: mega-ci
+    - get: bosh-bootloader
+  - task: build-release
+    file: mega-ci/scripts/ci/bosh-bootloader/build-release.yml
